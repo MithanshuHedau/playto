@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./backend
+    container_name: community_feed_backend
+    volumes:
+      - ./backend:/app
+    ports:
+      - "8080:8000"
+    environment:
+      - DEBUG=1
+      - DJANGO_ALLOWED_HOSTS=localhost,127.0.0.1,[::1],backend
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: community_feed_frontend
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    ports:
+      - "5273:5173"
+    depends_on:
+      - backend
+    environment:
+      - VITE_API_URL=http://localhost:8080/api
+    restart: unless-stopped
