@@ -1,74 +1,47 @@
 @import "tailwindcss";
 
-@layer base {
-  body {
-    background: linear-gradient(to bottom right, #f9fafb, #e5e7eb);
-    min-height: 100vh;
-  }
+:root {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: dark;
+  --bg-primary: #0f172a; /* Slate 900 */
+  --bg-secondary: #1e293b; /* Slate 800 */
+  --bg-tertiary: #334155; /* Slate 700 */
+  --text-primary: #ffffff; /* Pure White */
+  --text-secondary: #cbd5e1; /* Slate 300 - Brighter than before */
+  --accent-primary: #818cf8; /* Indigo 400 - Brighter for dark bg */
+  --accent-hover: #6366f1; /* Indigo 500 */
 }
 
-@layer components {
-  .card {
-    background-color: white;
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1);
-    padding: 1.5rem;
-    transition: box-shadow 0.3s;
-  }
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  min-height: 100vh;
+}
 
+
+@layer utilities {
+  .card {
+    @apply bg-slate-800 rounded-xl border border-slate-700 p-6 shadow-lg transition-all duration-200;
+  }
+  
   .card:hover {
-    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+    @apply border-slate-600 shadow-xl;
   }
 
   .btn-primary {
-    background-color: #0284c7;
-    color: white;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    font-weight: 500;
-    transition: background-color 0.2s;
-  }
-
-  .btn-primary:hover {
-    background-color: #0369a1;
-  }
-
-  .btn-primary:disabled {
-    opacity: 0.5;
-    cursor: not-allowed;
+    @apply bg-indigo-600 hover:bg-indigo-700 text-white font-medium py-2 px-6 rounded-lg 
+    transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed shadow-md hover:shadow-indigo-500/20;
   }
 
   .btn-secondary {
-    background-color: #e5e7eb;
-    color: #1f2937;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-    font-weight: 500;
-    transition: background-color 0.2s;
-  }
-
-  .btn-secondary:hover {
-    background-color: #d1d5db;
+    @apply bg-slate-700 hover:bg-slate-600 text-slate-200 font-medium py-2 px-4 rounded-lg 
+    transition-colors duration-200;
   }
 
   .input-field {
-    width: 100%;
-    padding: 0.5rem 1rem;
-    border: 1px solid #d1d5db;
-    border-radius: 0.5rem;
-    outline: none;
-    transition: all 0.2s;
-  }
-
-  .input-field:focus {
-    border-color: #0ea5e9;
-    box-shadow: 0 0 0 2px rgba(14, 165, 233, 0.2);
-  }
-}
-
-@layer utilities {
-  .animate-fade-in {
-    animation: fadeIn 0.3s ease-in;
   }
 
   .animate-slide-up {

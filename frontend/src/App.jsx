@@ -53,36 +53,60 @@ function App() {
   };
 
   return (
-    <div className="min-h-screen py-8">
-      <div className="max-w-7xl mx-auto px-4">
-        <header className="mb-8 text-center">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
-            🌟 Community Feed
-          </h1>
-          <p className="text-gray-600">
-            Share your thoughts, engage in discussions, and earn karma!
+    <div className="min-h-screen bg-[var(--bg-primary)]">
+      {/* Sticky Glass Header */}
+      <nav className="glass mb-8">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+          <div className="flex items-center gap-3">
+            <span className="text-2xl">⚡</span>
+            <h1 className="text-xl font-bold bg-gradient-to-r from-indigo-400 to-violet-400 bg-clip-text text-transparent">
+              Playto Feed
+            </h1>
+          </div>
+          <div className="text-sm text-[var(--text-secondary)]">v1.0.0</div>
+        </div>
+      </nav>
+
+      <div className="max-w-7xl mx-auto px-4 pb-12">
+        <header className="mb-10 text-center">
+          <h2 className="text-3xl md:text-4xl font-bold text-[var(--text-primary)] mb-3 tracking-tight">
+            Join the Conversation
+          </h2>
+          <p className="text-[var(--text-secondary)] max-w-2xl mx-auto text-lg leading-relaxed">
+            Share your thoughts, engage in deep discussions, and earn karma to
+            climb the leaderboard!
           </p>
         </header>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
           {/* Main Feed */}
-          <div className="lg:col-span-2 space-y-6">
+          <div className="lg:col-span-8 space-y-6">
             <CreatePost onPostCreated={handlePostCreated} />
 
             {loading ? (
               <div className="space-y-4">
                 {[1, 2, 3].map((i) => (
-                  <div key={i} className="card animate-pulse">
-                    <div className="h-4 bg-gray-200 rounded w-1/4 mb-4"></div>
-                    <div className="h-4 bg-gray-200 rounded w-3/4 mb-2"></div>
-                    <div className="h-4 bg-gray-200 rounded w-1/2"></div>
+                  <div key={i} className="card animate-pulse border-none">
+                    <div className="flex gap-4 mb-4">
+                      <div className="w-10 h-10 rounded-full bg-slate-700"></div>
+                      <div className="space-y-2 flex-1">
+                        <div className="h-4 bg-slate-700 rounded w-1/4"></div>
+                        <div className="h-3 bg-slate-700 rounded w-1/6"></div>
+                      </div>
+                    </div>
+                    <div className="h-4 bg-slate-700 rounded w-3/4 mb-2"></div>
+                    <div className="h-4 bg-slate-700 rounded w-1/2"></div>
                   </div>
                 ))}
               </div>
             ) : posts.length === 0 ? (
-              <div className="card text-center py-12">
-                <p className="text-gray-500 text-lg">
-                  No posts yet. Be the first to share something!
+              <div className="card text-center py-16 bg-slate-800/50">
+                <div className="text-4xl mb-4">📭</div>
+                <h3 className="text-xl font-medium text-[var(--text-primary)] mb-2">
+                  No posts yet
+                </h3>
+                <p className="text-[var(--text-secondary)]">
+                  Be the first to spark a conversation!
                 </p>
               </div>
             ) : (
@@ -97,8 +121,17 @@ function App() {
           </div>
 
           {/* Sidebar */}
-          <div className="lg:col-span-1">
-            <Leaderboard />
+          <div className="lg:col-span-4 space-y-6">
+            <div className="sticky top-24">
+              <Leaderboard />
+
+              <div className="mt-6 p-4 rounded-xl bg-indigo-500/10 border border-indigo-500/20 text-center">
+                <h4 className="font-bold text-white mb-1">🚀 Pro Tip</h4>
+                <p className="text-sm text-gray-100">
+                  Earn karma by receiving likes on your posts and comments.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
